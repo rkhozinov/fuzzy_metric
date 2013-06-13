@@ -1,0 +1,49 @@
+FUNCTION_BLOCK metric
+
+    VAR_INPUT
+        delay     :    REAL; (* RANGE(0 .. 1000) *)
+        bandwidth :    REAL; (* RANGE(0 .. 1000) *)
+    END_VAR
+
+    VAR_OUTPUT
+        metric    :    REAL; (* RANGE(0 .. 1) *)
+    END_VAR
+
+    FUZZIFY delay
+        TERM bad  :=    (0, 0)      (0, 1)      (500, 0)  ;
+        TERM good :=    (0, 0)      (500, 1)    (1000, 0) ;
+        TERM best :=    (500, 0)    (1000, 1)   (1000, 0) ;
+    END_FUZZIFY
+
+    FUZZIFY bandwidth
+        TERM bad :=     (0, 0)      (0, 1)      (500, 0)  ;
+        TERM good :=    (0, 0)      (500, 1)    (1000, 0) ;
+        TERM best :=    (500, 0)    (1000, 1)   (1000, 0) ;
+    END_FUZZIFY
+
+    DEFUZZIFY metric
+        TERM worst  := 1 ;
+        TERM bad    := 2 ;
+        TERM normal := 3 ;
+        TERM good   := 4 ;
+        TERM best   := 5 ;
+        ACCU:MAX;
+        METHOD: COGS (*MoM;*);
+        DEFAULT := 0;
+    END_DEFUZZIFY
+
+    RULEBLOCK first
+        AND:MIN;
+        (*ACCU:MAX;*)
+        RULE 0: IF (bandwidth IS bad)  AND (delay IS worst) THEN (metric IS worst);
+        RULE 1: IF (bandwidth IS bad)  AND (delay IS bad)   THEN (metric IS bad);
+        RULE 2: IF (bandwidth IS bad)  AND (delay IS good)  THEN (metric IS normal);
+        RULE 3: IF (bandwidth IS good) AND (delay IS worst) THEN (metric IS bad);
+        RULE 4: IF (bandwidth IS good) AND (delay IS bad)   THEN (metric IS normal);
+        RULE 5: IF (bandwidth IS good) AND (delay IS good)  THEN (metric IS good);
+        RULE 6: IF (bandwidth IS best) AND (delay IS worst) THEN (metric IS normal);
+        RULE 7: IF (bandwidth IS best) AND (delay IS bad)   THEN (metric IS good);
+        RULE 8: IF (bandwidth IS best) AND (delay IS good)  THEN (metric IS best);
+    END_RULEBLOCK
+
+END_FUNCTION_BLOCK
