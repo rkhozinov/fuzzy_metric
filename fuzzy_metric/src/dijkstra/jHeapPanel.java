@@ -38,12 +38,12 @@ public class jHeapPanel extends JPanel {
 	    return;
 	if (!this.heap.isEmpty()) {
 	    Color c = g.getColor();
-	    int i = this.drawVertex(g, this.heap.findMin(), 50, 40, 0, 0);
+	    int i = this.drawNode(g, this.heap.findMin(), 50, 40, 0, 0);
 	    g.setColor(c);
 	}
     }
 
-    private int drawVertex(Graphics g, Node vertical, int x, int y, int xO, int yO) {
+    private int drawNode(Graphics g, Node vertical, int x, int y, int xO, int yO) {
 	int delta = 0;
 	Node temp = vertical;
 	do {
@@ -53,7 +53,7 @@ public class jHeapPanel extends JPanel {
 	    }
 	    int i = 0;
 	    if (temp.getChildren() != null)
-		i = this.drawVertex(g, temp.getChildren(), x + delta, y + radius + 10, x + delta, y);
+		i = this.drawNode(g, temp.getChildren(), x + delta, y + radius + 10, x + delta, y);
 	    if (temp == this.heap.findMin())
 		g.setColor(jHeapPanel.Min);
 	    else if (temp.isMark())

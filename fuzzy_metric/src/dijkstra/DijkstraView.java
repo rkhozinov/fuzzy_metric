@@ -68,8 +68,6 @@ public class DijkstraView extends FrameView {
         saveMenuItem = new javax.swing.JMenuItem();
         jSeparator = new javax.swing.JPopupMenu.Separator();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
-        javax.swing.JMenu helpMenu = new javax.swing.JMenu();
-        javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         jOpenFileChooser = new javax.swing.JFileChooser();
         jSaveFileChooser = new javax.swing.JFileChooser();
 
@@ -81,7 +79,7 @@ public class DijkstraView extends FrameView {
         pnButton.setName("pnButton"); // NOI18N
         pnButton.setPreferredSize(new java.awt.Dimension(90, 300));
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(dijkstra.DijkstraApp.class).getContext().getResourceMap(DijkstraView.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DijkstraView.class);
         btnVertex.setText(resourceMap.getString("btnVertex.text")); // NOI18N
         btnVertex.setToolTipText(resourceMap.getString("btnVertex.toolTipText")); // NOI18N
         btnVertex.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -257,7 +255,7 @@ public class DijkstraView extends FrameView {
             pnGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnGraphLayout.createSequentialGroup()
                 .addComponent(jTextStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(jRandomCheck)
                 .addContainerGap())
         );
@@ -287,7 +285,7 @@ public class DijkstraView extends FrameView {
             pnHeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnHeapLayout.createSequentialGroup()
                 .addComponent(jTextHeap, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         jTextHeap.getAccessibleContext().setAccessibleName(resourceMap.getString("jTextHeap.AccessibleContext.accessibleName")); // NOI18N
@@ -321,7 +319,7 @@ public class DijkstraView extends FrameView {
         );
         pnSolutionLayout.setVerticalGroup(
             pnSolutionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -386,21 +384,12 @@ public class DijkstraView extends FrameView {
         jSeparator.setName("jSeparator"); // NOI18N
         fileMenu.add(jSeparator);
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(dijkstra.DijkstraApp.class).getContext().getActionMap(DijkstraView.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(DijkstraView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
-
-        helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
-        helpMenu.setName("helpMenu"); // NOI18N
-
-        aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
-        aboutMenuItem.setName("aboutMenuItem"); // NOI18N
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
 
         jOpenFileChooser.setFileFilter(new AppFilter());
         jOpenFileChooser.setName("jOpenFileChooser"); // NOI18N
